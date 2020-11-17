@@ -134,11 +134,60 @@ public class MainFrame extends JFrame {
         hboxResult.add(textFieldResult);
         hboxResult.add(Box.createHorizontalGlue());
 
+        JButton buttonCalc = new JButton("Вычислить");
+        buttonCalc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                try {
+                    Double x = Double.parseDouble(textFieldX.getText());
+                    Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
+                    Double result;
+                    if (formulaId == 1) {
+                        if (y == 0 || y < 0)
+                            throw new ArithmeticException("Y не должен быть равен 0 или быть меньше 0");
+                        if (x == 0 || x == -1)
+                            throw new ArithmeticException("X не должен быть равен 0 или -1");
+                        result = calculate1(x,y,z);
+                    } else {
+                        if (x == 0 || x < 0)
+                            throw new ArithmeticException("X не должен быть равен 0 или быть меньше 0");
+                        if (y == -1)
+                            throw new ArithmeticException("Y не должен быть равен -1");
+                        result = calculate2(x,y,z);
+                    }
+                    textFieldResult.setText(result.toString());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
+
+                } catch (ArithmeticException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this, ex.toString(), "Выход из ОДЗ", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        JButton buttonReset = new JButton("Очистить");
+        buttonReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+                textFieldResult.setText("0");
+            }
+        });
+
+        Box hboxButtons = Box.createHorizontalBox();
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.add(buttonCalc);
+        hboxButtons.add(Box.createHorizontalStrut(200));
+        hboxButtons.add(buttonReset);
+        hboxButtons.add(Box.createHorizontalGlue());
+
         Box contentBox=Box.createVerticalBox();
         contentBox.add(hboxFormulaType);
         contentBox.add(hboxFormulaImg);
         contentBox.add(hboxArguments);
         contentBox.add(hboxResult);
+        contentBox.add(hboxButtons);
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
