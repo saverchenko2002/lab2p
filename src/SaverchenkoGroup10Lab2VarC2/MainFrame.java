@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private static final int WIDTH = 1000;
-    private static final int HEIGHT = 500;
+    private static final int HEIGHT = 300;
 
     private JTextField textFieldX;
     private JTextField textFieldY;
@@ -178,7 +178,7 @@ public class MainFrame extends JFrame {
         Box hboxButtons = Box.createHorizontalBox();
         hboxButtons.add(Box.createHorizontalGlue());
         hboxButtons.add(buttonCalc);
-        hboxButtons.add(Box.createHorizontalStrut(200));
+        hboxButtons.add(Box.createHorizontalStrut(70));
         hboxButtons.add(buttonReset);
         hboxButtons.add(Box.createHorizontalGlue());
 
@@ -196,13 +196,63 @@ public class MainFrame extends JFrame {
         hboxVariableType.add(labelForMem3);
         hboxVariableType.add(Box.createHorizontalGlue());
 
+        JButton buttonMC = new JButton("MC");
+        buttonMC.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (memId == 1)
+                {
+                    mem1 = 0.0;
+                    textFieldResult.setText(mem1.toString());
+                }
+                else if (memId == 2)
+                {
+                    mem2 = 0.0;
+                    textFieldResult.setText(mem2.toString());
+                }
+                else {
+                    mem3 = 0.0;
+                    textFieldResult.setText(mem3.toString());
+                }
+                reloadMemoryPanel();
+            }
+        });
+
+        JButton buttonMP = new JButton("M+");
+        buttonMP.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (memId == 1) {
+                    mem1 += Double.parseDouble(textFieldResult.getText());
+                    textFieldResult.setText(mem1.toString());
+                }
+                else if (memId == 2)
+                {
+                    mem2 += Double.parseDouble(textFieldResult.getText());
+                    textFieldResult.setText(mem2.toString());
+                }
+                else {
+                    mem3 += Double.parseDouble(textFieldResult.getText());
+                    textFieldResult.setText(mem3.toString());
+                }
+                reloadMemoryPanel();
+            }
+        });
+
+        Box hboxVariableButtons = Box.createHorizontalBox();
+        hboxVariableButtons.add(Box.createHorizontalGlue());
+        hboxVariableButtons.add(buttonMP);
+        hboxVariableButtons.add(Box.createHorizontalStrut(70));
+        hboxVariableButtons.add(buttonMC);
+        hboxVariableButtons.add(Box.createHorizontalGlue());
+
         Box contentBox=Box.createVerticalBox();
         contentBox.add(hboxFormulaType);
         contentBox.add(hboxFormulaImg);
+        contentBox.add(Box.createVerticalGlue());
         contentBox.add(hboxArguments);
         contentBox.add(hboxResult);
         contentBox.add(hboxButtons);
         contentBox.add(hboxVariableType);
+        contentBox.add(hboxVariableButtons);
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
