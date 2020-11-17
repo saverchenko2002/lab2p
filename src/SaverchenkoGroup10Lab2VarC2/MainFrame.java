@@ -182,12 +182,27 @@ public class MainFrame extends JFrame {
         hboxButtons.add(buttonReset);
         hboxButtons.add(Box.createHorizontalGlue());
 
+        labelForMem1 = new JLabel(mem1.toString());
+        labelForMem2 = new JLabel(mem2.toString());
+        labelForMem3 = new JLabel(mem3.toString());
+        hboxVariableType.add(Box.createHorizontalGlue());
+        addVariableRadioButton("Переменная 1: ", 1);
+        hboxVariableType.add(labelForMem1);
+        hboxVariableType.add(Box.createHorizontalStrut(10));
+        addVariableRadioButton("Переменная 2: ", 2);
+        hboxVariableType.add(labelForMem2);
+        hboxVariableType.add(Box.createHorizontalStrut(1));
+        addVariableRadioButton("Переменная 3: ", 3);
+        hboxVariableType.add(labelForMem3);
+        hboxVariableType.add(Box.createHorizontalGlue());
+
         Box contentBox=Box.createVerticalBox();
         contentBox.add(hboxFormulaType);
         contentBox.add(hboxFormulaImg);
         contentBox.add(hboxArguments);
         contentBox.add(hboxResult);
         contentBox.add(hboxButtons);
+        contentBox.add(hboxVariableType);
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
