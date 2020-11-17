@@ -1,11 +1,12 @@
 package SaverchenkoGroup10Lab2VarC2;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
-    private static final int WIDTH = 700;
+    private static final int WIDTH = 1000;
     private static final int HEIGHT = 500;
 
     private JTextField textFieldX;
@@ -77,7 +78,31 @@ public class MainFrame extends JFrame {
     }
 
     public MainFrame(){
+        super("Вычисление формулы");
+        setSize(WIDTH,HEIGHT);
+        setResizable(false);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        setLocation((kit.getScreenSize().width-WIDTH)/2,(kit.getScreenSize().height-HEIGHT)/2);
+        Image img = kit.getImage("src/SaverchenkoGroup10Lab2VarC2/icon.png");
+        setIconImage(img);
 
+        hboxFormulaType.add(Box.createHorizontalGlue());
+        addFormulaRadioButton("Формула 1", 1);
+        addFormulaRadioButton("Формула 2", 2);
+        buttonsFormula.setSelected(buttonsFormula.getElements().nextElement().getModel(),true); // Установить выделенной 1-ую кнопку из группы
+        hboxFormulaType.add(Box.createHorizontalGlue());
+
+        Box hboxFormulaImg=Box.createHorizontalBox();
+        labelFormula = new JLabel();
+        icon = new ImageIcon("src/SaverchenkoGroup10Lab2VarC2/func1.png");
+        labelFormula.setIcon(icon);
+        hboxFormulaImg.add(labelFormula);
+
+
+        Box contentBox=Box.createVerticalBox();
+        contentBox.add(hboxFormulaType);
+        contentBox.add(hboxFormulaImg);
+        getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
     public static void main(String[] args){
