@@ -98,10 +98,47 @@ public class MainFrame extends JFrame {
         labelFormula.setIcon(icon);
         hboxFormulaImg.add(labelFormula);
 
+        JLabel labelForX = new JLabel("X:");
+        textFieldX = new JTextField("0", 10);
+        textFieldX.setMaximumSize(textFieldX.getPreferredSize());
+        JLabel labelForY = new JLabel("Y:");
+        textFieldY = new JTextField("0", 10);
+        textFieldY.setMaximumSize(textFieldY.getPreferredSize());
+        JLabel labelForZ = new JLabel("Z:");
+        textFieldZ = new JTextField("0", 10);
+        textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
+
+        Box hboxArguments = Box.createHorizontalBox();
+        hboxArguments.add(Box.createHorizontalGlue());
+        hboxArguments.add(labelForX);
+        hboxArguments.add(Box.createHorizontalStrut(10));
+        hboxArguments.add(textFieldX);
+        hboxArguments.add(Box.createHorizontalStrut(10));
+        hboxArguments.add(labelForY);
+        hboxArguments.add(Box.createHorizontalStrut(10));
+        hboxArguments.add(textFieldY);
+        hboxArguments.add(Box.createHorizontalStrut(10));
+        hboxArguments.add(labelForZ);
+        hboxArguments.add(Box.createHorizontalStrut(10));
+        hboxArguments.add(textFieldZ);
+        hboxArguments.add(Box.createHorizontalGlue());
+
+        JLabel labelForResult = new JLabel("Результат:");
+        textFieldResult = new JTextField("0", 20);
+        textFieldResult.setMaximumSize(textFieldResult.getPreferredSize());
+        textFieldResult.setEditable(false);
+        Box hboxResult = Box.createHorizontalBox();
+        hboxResult.add(Box.createHorizontalGlue());
+        hboxResult.add(labelForResult);
+        hboxResult.add(Box.createHorizontalStrut(10));
+        hboxResult.add(textFieldResult);
+        hboxResult.add(Box.createHorizontalGlue());
 
         Box contentBox=Box.createVerticalBox();
         contentBox.add(hboxFormulaType);
         contentBox.add(hboxFormulaImg);
+        contentBox.add(hboxArguments);
+        contentBox.add(hboxResult);
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
